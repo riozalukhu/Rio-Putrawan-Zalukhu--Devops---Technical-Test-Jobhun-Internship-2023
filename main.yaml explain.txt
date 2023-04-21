@@ -1,0 +1,10 @@
+Skrip main.yaml merupakn file github actions yang harus disimpan di dalam direktori ".github/workflows" di repositori anda 
+
+script main.yaml ini menjalankan langkah - langkah berikut : 
+
+1. checkout kode dari repositori yang sedang dipush.
+2. Menginstal klien SSH di mesin Ubuntu menggunakan apt-get.
+3. Menambahkan kunci pribadi SSH ke dalam file private_key.pem menggunakan isi dari secret SSH_PRIVATE_KEY.
+4. Mengatur known hosts dengan menambahkan host SSH ke dalam file ~/.ssh/known_hosts menggunakan isi dari secret SSH_HOST.
+5. Menggunakan perintah scp untuk mengirimkan kode ke instance SSH yang ditentukan dalam secret SSH_HOST ke direktori target yang   
+   ditentukan dalam secret SSH_TARGET_DIRECTORY.

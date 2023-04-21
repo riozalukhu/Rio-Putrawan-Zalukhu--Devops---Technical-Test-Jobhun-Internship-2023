@@ -1,0 +1,38 @@
+Penjelasan:
+
+- apiVersion: Menyatakan versi API Kubernetes yang digunakan. Pada contoh di atas, menggunakan versi apps/v1 yang merupakan versi 
+  stabil untuk objek Deployment.
+
+- kind: Menyatakan jenis objek yang ingin didefinisikan. Pada contoh di atas, jenis objek yang didefinisikan adalah Deployment.
+
+- metadata: Menyatakan metadata atau informasi tambahan untuk objek yang didefinisikan, seperti nama objek.
+
+- spec: Menyatakan spesifikasi atau konfigurasi untuk objek yang didefinisikan.
+
+  -replicas: Menyatakan jumlah replika yang ingin dijalankan untuk aplikasi. Pada contoh di atas, dijalankan 3 replika.
+
+  -selector: Menyatakan selektor yang digunakan untuk memilih objek-objek yang akan dikelola oleh Deployment. Pada contoh di atas, 
+   menggunakan label app: my-app untuk memilih objek yang memiliki label app dengan nilai my-app.
+
+  -template: Menyatakan template atau konfigurasi untuk pod-pod yang akan dibuat oleh Deployment.
+
+       -metadata: Menyatakan metadata atau label untuk pod-pod yang akan dibuat.
+
+       -spec: Menyatakan spesifikasi atau konfigurasi untuk pod-pod yang akan dibuat.
+
+       -containers: Menyatakan kontainer yang akan dijalankan di dalam pod-pod yang akan dibuat.
+
+              -name: Menyatakan nama untuk kontainer yang akan dijalankan.
+
+              -image: Menyatakan nama image Docker yang akan digunakan untuk menjalankan kontainer. Pada contoh di atas, menggunakan 
+               image my-app-image dengan tag latest.
+
+              -ports: Menyatakan port yang akan diexpose pada kontainer. Pada contoh di atas, kontainer akan diexpose pada port 80.
+
+Dengan menggunakan YAML file di atas, Anda dapat menggunakan perintah kubectl apply -f <nama_file.yaml> untuk menerapkan konfigurasi tersebut ke dalam cluster Kubernetes Anda dan menjalankan aplikasi dengan menggunakan objek Deployment yang didefinisikan.
+
+
+
+
+
+

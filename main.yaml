@@ -1,0 +1,33 @@
+name: Deploy to SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Install SSH client
+      run: sudo apt-get update && sudo apt-get install -y openssh-client
+    
+    - name: Add private key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    
+    - name: Set up known hosts
+      run: ssh-keyscan -t rsa ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+    
+    - name: Deploy to SSH
+      run: scp -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r ./ user@${{ secrets.SSH_HOST }}:${{ secrets.SSH_TARGET_DIRECTORY }}
+      env:
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_TARGET_DIRECTORY: ${{ secrets.SSH_TARGET_DIRECTORY }}
